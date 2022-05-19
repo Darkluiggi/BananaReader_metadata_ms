@@ -1,8 +1,8 @@
 {
-  "name": "metadata-cmp",
+  "name": "BananaReader_metadata_ms",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Diego Fernando Bulla Poveda",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -18,7 +18,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migrations:generate": "npm run typeorm -- migration:generate -n",
+    "migrations:run": "npm run typeorm -- migration:run",
+    "migrations:drop": "npm run typeorm -- scheme:drop"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -26,6 +30,10 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "mariadb": "^3.0.0",
+    "mysql": "^2.18.1",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

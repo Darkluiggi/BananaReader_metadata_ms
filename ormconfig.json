@@ -1,0 +1,15 @@
+{
+    "type": "mariadb",
+    "host": "localhost",
+    "username": "banana",
+    "port": 3306,
+    "database": "bananadb",
+    "password": "secretbanana",
+    "synchronize": false,
+    "entities": ["src/**/*.entity{.ts,.js}"],
+    "migrationsTableName": "migrations",
+    "migrations": ["src/database/migrations/*{.ts,.js}"],
+    "cli": {
+        "migrationsDir": "src/database/migrations"
+    }
+}

@@ -10,23 +10,19 @@ export const databaseProviders = [
     inject: [ConfigService],
     async useFactory(config: ConfigService) {
       return {
-        type: 'postgres' as 'postgres',
-        host: config.get(Configuration.HOST),
-        username: config.get(Configuration.USERNAME),
-        port: 5432,
-        database: config.get(Configuration.DATABASE),
-        password: config.get(Configuration.PASSWORD),
+        type: 'mariadb' as 'mariadb',
+        host: "172.19.0.2",//config.get(Configuration.DB_HOST),
+        username: config.get(Configuration.DB_USER),
+        port: parseInt(config.get(Configuration.DB_PORT)),
+        database: config.get(Configuration.DB_NAME),
+        password: config.get(Configuration.DB_PASS),
+        connectTimeoutMS: undefined,
         autoLoadEntities: true,
-        synchronize: true,
+        synchronize: !!config.get(Configuration.DB_SYNC),
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         migrations: [__dirname + '/migrations/*{.ts,.js}'],
-        //ssl: true,
-        /*extra: { 
-            trustServerCertificate: false,
-            Encrypt: true,
-            IntegratedSecurity: true,
-
-            }*/
+        retryAttempts: 10,
+        retryDelay: 3000
       } as ConnectionOptions
     }
   }),

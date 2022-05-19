@@ -1,18 +1,26 @@
-version: "3.8"
+version: '3.9'
+
 services:
-  database:
-    image: postgres:14.1
-    restart: always
+  bananareader_metadata_db:
+    image: mariadb:latest
+    restart: unless-stopped
+    container_name: bananareader-metadata-db
     environment:
-      - POSTGRES_DB=metadata
-      - POSTGRES_USER=usuario
-      - POSTGRES_PASSWORD=clave
-      - PGHOST=localhost
+      - MYSQL_ROOT_PASSWORD=raiz
+      - MYSQL_PASSWORD=secretbanana
+      - MYSQL_USER=banana
+      - MYSQL_DATABASE=bananadb
     ports:
-      - "5432:5432"
-    #network_mode: bridge
+      - 3306:3306
     volumes:
-      - postgres_data:/var/lib/postgresql
+      - maria_data:/var/lib/mysqla
+  bananareader_metadata_ms:
+    image: bananareader-metadata-ms
+    restart: always
+    container_name: bananareader-metadata-ms
+    ports:
+      - 5001:5000
+
 volumes:
-  postgres_data:
-    external: true
+  maria_data:
+#    external: true
